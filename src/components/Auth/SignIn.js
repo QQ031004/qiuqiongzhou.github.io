@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import{ signIn } from '../../store/actions/authActions'
+import { Redirect } from 'react-router-dom'
 
 class SignIn extends Component {
    state = {
@@ -13,11 +16,13 @@ class SignIn extends Component {
    }
    handleSubmit = (e) => {
        e.preventDefault();                          //för att kunna registrera password
-       console.log(this.state) 
-
+       this.props.signIn(this.state)
+      // console.log(this.state)   andra omgång skrevs såhär
 //console.log(e) det skrev såhär i början
    }
    render() {
+     const { authError, auth } = this.props;
+     if(auth.uid) return <Redirect to='/' />
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="white">
@@ -32,6 +37,9 @@ class SignIn extends Component {
           </div>
           <div className="input-field">
               <button className="btn pink lighten-1 zdepth-0">Login</button>
+              <div className="red-text center">
+                { authError ? <p>{authError}</p> : null }
+              </div>
           </div>
         </form>
       </div>
@@ -39,7 +47,18 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (creds) => dispatch(signIn(creds))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
 
 
 // Se kommentar i index.html angående sign ins script src effekt

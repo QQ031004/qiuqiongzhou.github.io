@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 
 const ProjectList = ({projects}) => {
     return(
-        <div className="project-list-section">
-            { projects && projects.map(project => {
+        <div className="project-list section">
+            { projects && projects.map(item => {
                 return (
-                    <Link to={'/project/' + project.id}>
-                        <ProjectSummary project={project} key={project.id} />                    
-                    </Link>
+                    <Link to={`/project/${item.id}`} key={item.id}>
+              <ProjectSummary project={item} />
+            </Link>
               )
             })}          
         </div>
@@ -18,7 +18,7 @@ const ProjectList = ({projects}) => {
     }
        
 
-
+ export default ProjectList
  
 //   ProjectSummary = följande div
        //   <div className="card z-depth-0 project-summary">
@@ -28,6 +28,10 @@ const ProjectList = ({projects}) => {
           //      <p className="grey-text">27 Mars, 2019</p>
           //  </div>
         
-    
-        export default ProjectList
+
+          //Följande blev byts ut av rad 10, 11, pga felet i console 
+         // <Link to={'/project/' + project.id}>  
+          //<ProjectSummary project={project} key={project.id} />                    
+     // </Link>
+       
 
