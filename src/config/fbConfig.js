@@ -6,7 +6,7 @@ import 'firebase/auth'
 // Initialize Firebase
   // Initialize Firebase
   var config = {
-    (Har tagit bort APIkey från GitHub 2019-05-28)
+    (Har tagit bort APIkey från GitHub 2019-05-28, fråga mig om det)
   };
 
 
